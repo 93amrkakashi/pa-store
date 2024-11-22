@@ -46,113 +46,135 @@ const CustomNextArrow: React.FC<ArrowProps> = ({
   </button>
 );
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  oldPrice: number;
-  discount: string;
-  image: string;
-  isNew: boolean;
-  rating: number;
-}
-
 interface ProductSliderProps {
   title: string;
+  types?: string[];
+  selectedType?: string;
   buttonTitle: string;
-  products: Product[]; // استلام المنتجات كـ prop
 }
 
 const ProductSlider: React.FC<ProductSliderProps> = ({
   title,
   buttonTitle,
-  products,
 }) => {
+  // add here types and selectedType
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    pagination: true,
+    draggable: true,
+    swipe: true,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
     responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 4 } },
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
     ],
   };
 
   return (
     <div className="section overflow-hidden">
-      <div className="container overflow-hidden mb-[20px]">
+      <div className="container overflow-hidden  mb-[20px] ">
         <div className="row">
           <div className="col-md-12">
             <h3 className="title text-7xl text-center font-bold text-primary-text">
               {title}
             </h3>
           </div>
+
           <div className="col-md-12 py-[50px]">
-            <Slider {...settings} className="products-slick">
-              {products.map((product) => (
-                <div
-                  className="product !scale-[0.95] hover:!scale-1"
-                  key={product.id}
-                >
-                  <Link to={`/products/${product.id}`}>
-                    <div className="product-img">
-                      <img src={product.image} alt={product.name} />
-                      <div className="product-label">
-                        <span className={product.isNew ? "new" : "sale"}>
-                          {product.discount}
-                        </span>
+            <div className="row">
+              <div className="products-tabs ">
+                <div id="tab1" className="tab-pane w-full active">
+                  <Slider {...settings} className="products-slick">
+                    {/* عناصر السلايدر */}
+                    {[...Array(5)].map((_, index) => (
+                      <div
+                        className="product !scale-[0.95] hover:!scale-1"
+                        key={index}
+                      >
+                        <Link to="/products/box">
+                          <div className="product-img">
+                            <img
+                              src={`/img/home/start-work-category.jpeg`}
+                              alt=""
+                            />
+                            <div className="product-label">
+                              <span
+                                className={index % 2 === 0 ? "sale" : "new"}
+                              >
+                                {index % 2 === 0 ? "-30%" : "جديد"}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="product-body">
+                            <p className="product-category">كتب</p>
+                            <h3 className="product-name">كيف تبيع الهواء</h3>
+                            <h4 className="product-price">
+                              $2 <del className="product-old-price">$200</del>
+                            </h4>
+                            <div className="product-rating">
+                              <i className="fa fa-star"></i>
+                              <i className="fa fa-star"></i>
+                              <i className="fa fa-star"></i>
+                              <i className="fa fa-star"></i>
+                              <i className="fa fa-star-o"></i>
+                            </div>
+                            <div className="product-btns">
+                              <button className="add-to-wishlist">
+                                <i className="fa fa-heart-o"></i>
+                                <span className="tooltipp">
+                                  إضافة إلى المفضلة
+                                </span>
+                              </button>
+                              <button className="add-to-compare">
+                                <i className="fa fa-exchange"></i>
+                                <span className="tooltipp">إضافة للمقارنة</span>
+                              </button>
+                              <button className="quick-view">
+                                <i className="fa fa-eye"></i>
+                                <span className="tooltipp">عرض سريع</span>
+                              </button>
+                            </div>
+                          </div>
+                        </Link>
+                        <div className="add-to-cart">
+                          <button className="add-to-cart-btn">
+                            <i className="fa fa-shopping-cart"></i> إضافة إلى
+                            السلة
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="product-body">
-                      <p className="product-category">{product.category}</p>
-                      <h3 className="product-name">{product.name}</h3>
-                      <h4 className="product-price">
-                        ${product.price}{" "}
-                        <del className="product-old-price">
-                          ${product.oldPrice}
-                        </del>
-                      </h4>
-                      <div className="product-rating">
-                        {[...Array(5)].map((_, i) => (
-                          <i
-                            key={i}
-                            className={`fa ${
-                              i < product.rating ? "fa-star" : "fa-star-o"
-                            }`}
-                          ></i>
-                        ))}
-                      </div>
-                      <div className="product-btns">
-                        <button className="add-to-wishlist">
-                          <i className="fa fa-heart-o"></i>
-                          <span className="tooltipp">إضافة إلى المفضلة</span>
-                        </button>
-                        <button className="add-to-compare">
-                          <i className="fa fa-exchange"></i>
-                          <span className="tooltipp">إضافة للمقارنة</span>
-                        </button>
-                        <button className="quick-view">
-                          <i className="fa fa-eye"></i>
-                          <span className="tooltipp">عرض سريع</span>
-                        </button>
-                      </div>
-                    </div>
-                  </Link>
-                  <div className="add-to-cart">
-                    <button className="add-to-cart-btn">
-                      <i className="fa fa-shopping-cart"></i> إضافة إلى السلة
-                    </button>
-                  </div>
+                    ))}
+                  </Slider>
                 </div>
-              ))}
-            </Slider>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -168,4 +190,3 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
 };
 
 export default ProductSlider;
-

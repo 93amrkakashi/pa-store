@@ -128,7 +128,7 @@ const Product = () => {
     <div>
       <Breadcrumb />
       <ProductDetails />
-      <ProductSlider title='منتجات مماثلة' buttonTitle='اظهر جميع المنتجات' products={products} />
+      <ProductSlider title='منتجات مماثلة' buttonTitle='اظهر جميع المنتجات'  />
       <MulitSectionProductsSlider />
     </div>
   )

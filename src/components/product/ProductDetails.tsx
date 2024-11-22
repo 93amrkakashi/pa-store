@@ -75,7 +75,7 @@ const ProductDetails: React.FC = () => {
 
           {/* Product details */}
           <div className="col-md-6 h-full " dir='rtl'>
-            <div className="product-details lg:translate-y-1/4 flex  flex-col  !justify-center">
+            <div className="product-details  flex  flex-col  !justify-center">
               <h2 className="product-name">كيف تبيع الهواء</h2>
               <div>
                 <div className="product-rating">
@@ -91,7 +91,7 @@ const ProductDetails: React.FC = () => {
                 <h3 className="product-price">2$ <del className="product-old-price">20$</del></h3>
                 <span className="product-available">متوفر في المخزون</span>
               </div>
-              <p className='justify-centerw-full text-justify text-2xl leading-tight'>
+              <p className='justify-center w-full text-justify text-2xl md:text-3xl leading-8'>
                   ملخص الكتاب 
 هل فكرت يوماً ما أنك تستطيعُ بيعَ شيءٍ غير ملموس مثل الهواء؟ 
 "كيف تبيع الهواء" رحلةٌ غير اعتيادية في عالم البيع، يخبرك فيها أنك قادر على بيع أي شيء في الدنيا، حتى لو أردت بيع الهواء، ويتحدث الكاتب معك وكأنكما تجلسان في مقهى وتستمتعان بقهوة الصباح.
